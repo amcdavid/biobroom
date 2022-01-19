@@ -5,23 +5,26 @@ unrowname <- function(x) {
 
 compact <- function(x) Filter(Negate(is.null), x)
 
-
 finish <- function(x) {
     x <- unrowname(x)
-
     opt <- getOption("biobroom.return", default = "tbl_df")
     if (opt == "tbl_df") {
-        dplyr::tbl_df(x)
-    } else if (opt == "tbl_dt") {
-        dplyr::tbl_dt(x)
-    } else if (opt == "data.table") {
-        data.table::as.data.table(tbl_dt(x))
-    } else if (opt == "data.frame") {
+        tibble::as_tibble(x)
+    }
+    else if (opt == "tbl_dt") {
+        tibble::as_tibble(x)
+    }
+    else if (opt == "data.table") {
+        data.table::as.data.table(tibble::as_tibble(x))
+    }
+    else if (opt == "data.frame") {
         as.data.frame(x)
-    } else {
+    }
+    else {
         stop(paste("Invalid biobroom.return format", opt))
     }
 }
+
 # From broom package
 fix_data_frame <- function(x, newnames = NULL, newcol = "term", check.names = FALSE)
 {
