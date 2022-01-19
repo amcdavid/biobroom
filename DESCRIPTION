@@ -36,8 +36,13 @@ Suggests:
     knitr,
     data.table,
     MSnbase,
-    SummarizedExperiment
+    SummarizedExperiment,
+    roxyglobals (>= 0.2.1),
 VignetteBuilder: knitr
 URL: https://github.com/StoreyLab/biobroom
 BugReports: https://github.com/StoreyLab/biobroom/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 7.1.2
+Roxygen: list(
+  roclets = c("collate", "namespace", "rd", "roxyglobals::global_roclet"))
+Remotes: 
+  anthonynorth/roxyglobals
