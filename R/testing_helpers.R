@@ -54,11 +54,11 @@ makeExampleDataSet <-
         stop("Unrecognized data type: ", type ,".\n  Available options are: ",
              paste(.ds.info$type, collapse=',', sep=' '))
     }
-    if (!require("DESeq2")) {
+    if (!requireNamespace("DESeq2")) {
         stop("DESeq2 required to create dataset")
     }
     pkg <- ds.info$package
-    if (type != 'DESeq2' && !require(pkg, character.only=TRUE)) {
+    if (type != 'DESeq2' && !requireNamespace(pkg, character.only=TRUE)) {
         stop(pkg, " package required to create data of this type")
     }
 
