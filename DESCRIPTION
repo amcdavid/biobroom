@@ -22,6 +22,7 @@ Imports:
     dplyr,
     ellipsis,
     tidyr,
+    tibble,
     Biobase
 Suggests:
     limma,
