@@ -63,6 +63,7 @@ NULL
 #'
 #' @import broom
 #' @method tidy MArrayLM
+#' @autoglobal
 #' @export
 tidy.MArrayLM <- function(x, intercept = FALSE, ...) {
     coefs <- fix_data_frame(x$coefficients, newnames = colnames(x),
@@ -170,6 +171,7 @@ tidy.MAList <- function(x, ...) {
 #'   \item{weight}{present if \code{weights} is set}
 #'   \item{other columns}{if present and if \code{addTargets} is set}
 #' @method tidy EList
+#' @importFrom stats setNames
 #' @export
 tidy.EList <- function(x, addTargets=FALSE, ...) {
   ret <- tidy_matrix(x$E)

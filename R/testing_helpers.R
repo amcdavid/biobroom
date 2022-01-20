@@ -20,7 +20,7 @@ ExpressionSet           eSet           Biobase
 
 # @param type The type of object to output. So far we can build objects for
 #   \itemize{
-#    \item{\code{"DESeq2"}}{
+#   \item{\code{"DESeq2"}}{
 #         A \code{\link[DESeq2]{DESeqDataSet}}
 #     }
 #     \item{\code{"edgeR"}}{
@@ -41,8 +41,8 @@ ExpressionSet           eSet           Biobase
 #       An \code{\link[Biobase]{ExpressionSet}}
 #     }
 #   }
-#
 # @return The desired output object
+#' @importFrom stats model.matrix
 makeExampleDataSet <-
     function(type = 'DESeq2',
              n = 1000, m = 12, betaSD = 0, interceptMean = 4,
@@ -66,29 +66,29 @@ makeExampleDataSet <-
                                            interceptMean = interceptMean,
                                            interceptSD = interceptSD,
                                            dispMeanRel = dispMeanRel)
-    dds <- estimateSizeFactors(dds)
-    xprs <- log2(counts(dds, normalized=TRUE) + 1)
-    pd <- as.data.frame(colData(dds))
+    dds <- DESeq2::estimateSizeFactors(dds)
+    xprs <- log2(DESeq2::counts(dds, normalized=TRUE) + 1)
+    pd <- as.data.frame(SummarizedExperiment::colData(dds))
     fd <- data.frame(
         gene=rownames(dds),
-        seqnames=as.character(seqnames(rowRanges(dds))),
-        start=start(rowRanges(dds)),
-        end=end(rowRanges(dds)),
+        seqnames=as.character(SummarizedExperiment::seqnames(SummarizedExperiment::rowRanges(dds))),
+        start=SummarizedExperiment::start(SummarizedExperiment::rowRanges(dds)),
+        end=SummarizedExperiment::end(SummarizedExperiment::rowRanges(dds)),
         stringsAsFactors=FALSE)
 
     if (type == 'DESeq2') {
         out <- dds
     } else if (type %in% c('edgeR', 'limma', 'voom', 'voomWithQualityWeights')) {
-        out <- DGEList(counts(dds))
-        out <- calcNormFactors(out)
+        out <- edgeR::DGEList(DESeq2::counts(dds))
+        out <- edgeR::calcNormFactors(out)
         out$samples <- cbind(out$samples, pd)
         out$genes <- fd
         if (type != 'edgeR') {
-            mm <- model.matrix(design(dds), out$samples)
+            mm <- model.matrix(DESeq2::design(dds), out$samples)
             if (type == 'voomWithQualityWeights') {
-                out <- voomWithQualityWeights(out, mm, plot=FALSE)
+                out <- limma::voomWithQualityWeights(out, mm, plot=FALSE)
             } else {
-                out <- voom(out, mm, plot=FALSE)
+                out <- limma::voom(out, mm, plot=FALSE)
             }
             if (type == 'limma') {
                 out$weights <- NULL
@@ -98,13 +98,13 @@ makeExampleDataSet <-
         }
     } else if (type == 'ExpressionSet') {
         out <- ExpressionSet(xprs)
-        pData(out) <- pd
-        fData(out) <- fd
+        Biobase::pData(out) <- pd
+        Biobase::fData(out) <- fd
     } else {
         stop(type, " not yet accounted for")
     }
 
-    if (!is(out, ds.info$class)) {
+    if (!inherits(out, ds.info$class)) {
         warning("The output object is a ", class(out), " but we expected ",
                 ds.info$class)
     }

@@ -105,6 +105,7 @@ augment.DGEList <- function(x, data = NULL, ...) {
 #'   \item{comparison}{The pair of groups compared by edgeR, delimited by /}
 #'
 #' @method glance DGEExact
+#' @importFrom stats p.adjust
 #' @export
 glance.DGEExact <- function(x, alpha=.05, p.adjust.method="fdr", ...) {
     pvals <- x$table$PValue

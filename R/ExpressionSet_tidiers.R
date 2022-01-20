@@ -32,6 +32,7 @@
 #'
 #' @method tidy ExpressionSet
 #' @export
+#' @autoglobal
 #' @importFrom Biobase assayDataElement assayDataElementNames pData
 tidy.ExpressionSet <- function(x, addPheno=FALSE,
                                assay=Biobase::assayDataElementNames(x)[1L],

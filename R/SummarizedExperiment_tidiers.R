@@ -31,6 +31,7 @@
 #' is added.
 #'
 #' @method tidy RangedSummarizedExperiment
+#' @autoglobal
 #' @export
 tidy.RangedSummarizedExperiment <- function(x, addPheno=FALSE,
                                             assay=SummarizedExperiment::assayNames(x)[1L],
@@ -45,7 +46,7 @@ tidy.RangedSummarizedExperiment <- function(x, addPheno=FALSE,
         dplyr::mutate(sample=as.character(sample))
 
     if (addPheno) {
-        pdat <- as.data.frame(colData(x))
+        pdat <- as.data.frame(SummarizedExperiment::colData(x))
         rownames(pdat) <- colnames(x)
         ret <- cbind(
             ret[, c('gene', 'sample')],

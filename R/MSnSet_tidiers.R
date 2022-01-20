@@ -29,6 +29,7 @@
 #'   \item{value}{protein quantitation data}
 #'
 #' @method tidy MSnSet
+#' @autoglobal
 #' @export
 tidy.MSnSet <- function(x, addPheno=FALSE, ...) {
     expressions <- fix_data_frame(Biobase::exprs(x), newcol="protein")

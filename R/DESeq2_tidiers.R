@@ -68,6 +68,7 @@
 #'
 #' @method tidy DESeqDataSet
 #' @export
+#' @autoglobal
 tidy.DESeqDataSet <- function(x, colData = FALSE, intercept = FALSE, ...) {
     # try to extract the per-gene, per-coefficient information
     resnames <- DESeq2::resultsNames(x)
@@ -82,7 +83,7 @@ tidy.DESeqDataSet <- function(x, colData = FALSE, intercept = FALSE, ...) {
     }
 
     # otherwise, tidy the expression data within it
-    expressions <- fix_data_frame(counts(x), newcol="gene")
+    expressions <- fix_data_frame(DESeq2::counts(x), newcol="gene")
     ret <- expressions %>%
         tidyr::gather(sample, count, -gene) %>%
         dplyr::mutate(sample=as.character(sample))
@@ -163,7 +164,7 @@ tidy.DESeqTransform = function(x, colData = FALSE, ...){
     ellipsis::check_dots_empty()
 
     # Tidy the normalised expression data within the object
-    expressions = tibble::as_tibble(assay(x), rownames = "gene")
+    expressions = tibble::as_tibble(SummarizedExperiment::assay(x), rownames = "gene")
 
     ret = expressions %>%
         tidyr::gather(sample, log2Count, -gene) %>%

@@ -20,10 +20,11 @@
 #'   \item{value}{expressions on log2 scale}
 #'
 #' @method tidy deSet
+#' @autoglobal
 #' @export
 tidy.deSet <- function(x, addPheno=FALSE, ...) {
   if (is.null(rownames(exprs(x))) | all(rownames(exprs(x)) == 1:nrow(exprs(x)))) {
-    rownames(exprs(x)) <- paste0("g", 1:nrow(exprs(x)))
+    rownames(Biobase::exprs(x)) <- paste0("g", 1:nrow(exprs(x)))
   }
   if (is.null(colnames(exprs(x))) | all(colnames(exprs(x)) == 1:ncol(exprs(x)))) {
     colnames(exprs(x)) <- paste0("sample", 1:ncol(exprs(x)))

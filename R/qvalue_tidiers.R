@@ -59,6 +59,7 @@
 #' @import broom dplyr
 #' @importFrom tidyr gather spread
 #' @method tidy qvalue
+#' @autoglobal
 #' @export
 tidy.qvalue <- function(x, ...) {
     ret <- as.data.frame(compact(x[c("lambda", "pi0.lambda", "pi0.smooth")]))
