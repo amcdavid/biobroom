@@ -30,8 +30,8 @@
 #'   \item{sample}{sample name (from column names)}
 #'   \item{value}{expressions on log2 scale}
 #'
-#' @S3method tidy ExpressionSet
-#' @export tidy.ExpressionSet
+#' @method tidy ExpressionSet
+#' @export
 #' @importFrom Biobase assayDataElement assayDataElementNames pData
 tidy.ExpressionSet <- function(x, addPheno=FALSE,
                                assay=Biobase::assayDataElementNames(x)[1L],

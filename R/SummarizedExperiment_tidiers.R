@@ -30,8 +30,8 @@
 #' If \code{addPheno} is TRUE then information from colData
 #' is added.
 #'
-#' @S3method tidy RangedSummarizedExperiment
-#' @export tidy.RangedSummarizedExperiment
+#' @method tidy RangedSummarizedExperiment
+#' @export
 tidy.RangedSummarizedExperiment <- function(x, addPheno=FALSE,
                                             assay=SummarizedExperiment::assayNames(x)[1L],
                                             ...) {

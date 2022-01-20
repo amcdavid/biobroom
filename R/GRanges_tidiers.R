@@ -36,8 +36,8 @@
 #' }
 
 #' @rdname GRanges_tidiers
-#' @S3method tidy GRanges
-#' @export tidy.GRanges
+#' @method tidy GRanges
+#' @export
 tidy.GRanges <- function(x, ...) {
   x.dt = as.data.frame(x@ranges)
 
@@ -56,8 +56,8 @@ tidy.GRanges <- function(x, ...) {
 
 
 #' @rdname GRanges_tidiers
-#' @S3method tidy GRangesList
-#' @export tidy.GRangesList
+#' @method tidy GRangesList
+#' @export
 tidy.GRangesList <- function(x, ...) {
   x.dt = tidy(x@unlistData)
 
@@ -71,8 +71,8 @@ tidy.GRangesList <- function(x, ...) {
 
 
 #' @rdname GRanges_tidiers
-#' @S3method glance GRanges
-#' @export glance.GRanges
+#' @method glance GRanges
+#' @export
 glance.GRanges <- function(x, ...) {
   x.dt = tidy(x)
   ret = data.frame(ranges = length(gr),
@@ -82,8 +82,8 @@ glance.GRanges <- function(x, ...) {
 
 
 #' @rdname GRanges_tidiers
-#' @S3method glance GRangesList
-#' @export glance.GRangesList
+#' @method glance GRangesList
+#' @export
 glance.GRangesList <- function(x, ...) {
   x.dt = tidy(x)
   ret = data.frame(ranges = length(gr),

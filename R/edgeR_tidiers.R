@@ -27,8 +27,8 @@
 #'     head(glance(et))
 #' }
 #'
-#' @S3method tidy DGEExact
-#' @export tidy.DGEExact
+#' @method tidy DGEExact
+#' @export
 tidy.DGEExact <- function(x, ...) {
     ret <- fix_data_frame(x$table, c("estimate", "logCPM", "p.value"),
                           newcol = "gene")
@@ -49,8 +49,8 @@ tidy.DGEExact <- function(x, ...) {
 #' in \code{x$samples}.
 #'
 #'
-#' @S3method tidy DGEList
-#' @export tidy.DGEList
+#' @method tidy DGEList
+#' @export
 tidy.DGEList <- function(x, addSamples = FALSE, ...) {
     if (is.null(rownames(x$counts)) | all(rownames(x$counts) == 1:nrow(x$counts))) {
       rownames(x$counts) <- paste0("g", 1:nrow(x$counts))
@@ -74,8 +74,8 @@ tidy.DGEList <- function(x, addSamples = FALSE, ...) {
 
 #' @rdname edgeR_tidiers
 #' @return \code{augment} returns per-gene information (DGEList only)
-#' @S3method augment DGEList
-#' @export augment.DGEList
+#' @method augment DGEList
+#' @export
 augment.DGEList <- function(x, data = NULL, ...) {
     ret <- list()
     # other columns that can be combined (include only those that exist)
@@ -104,8 +104,8 @@ augment.DGEList <- function(x, data = NULL, ...) {
 #'   method and confidence level}
 #'   \item{comparison}{The pair of groups compared by edgeR, delimited by /}
 #'
-#' @S3method glance DGEExact
-#' @export glance.DGEExact
+#' @method glance DGEExact
+#' @export
 glance.DGEExact <- function(x, alpha=.05, p.adjust.method="fdr", ...) {
     pvals <- x$table$PValue
     pvals.adj <- p.adjust(pvals, p.adjust.method)

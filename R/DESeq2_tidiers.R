@@ -66,8 +66,8 @@
 #'     }
 #' }
 #'
-#' @S3method tidy DESeqDataSet
-#' @export tidy.DESeqDataSet
+#' @method tidy DESeqDataSet
+#' @export
 tidy.DESeqDataSet <- function(x, colData = FALSE, intercept = FALSE, ...) {
     # try to extract the per-gene, per-coefficient information
     resnames <- DESeq2::resultsNames(x)
@@ -102,8 +102,8 @@ tidy.DESeqDataSet <- function(x, colData = FALSE, intercept = FALSE, ...) {
 
 #' @rdname DESeq2_tidiers
 #'
-#' @S3method tidy DESeqResults
-#' @export tidy.DESeqResults
+#' @method tidy DESeqResults
+#' @export
 tidy.DESeqResults <- function(x, ...) {
     nn <- c("baseMean", "estimate", "stderror", "statistic", "p.value", "p.adjusted")
     finish(fix_data_frame(x, newnames = nn, newcol = "gene"))
@@ -132,7 +132,6 @@ tidy.DESeqResults <- function(x, ...) {
 #' in \code{colData(x)}.
 #'
 #' @name DESeq2_tidiers
-#' @importClassesFrom  DESeq2 DESeqTransform
 #'
 #' @examples
 #'
@@ -162,9 +161,6 @@ tidy.DESeqResults <- function(x, ...) {
 #' @author Hugo Tavares https://gist.github.com/tavareshugo/3973461a7daf8a43e65e3566d5deed14
 tidy.DESeqTransform = function(x, colData = FALSE, ...){
     ellipsis::check_dots_empty()
-    if(!requireNamespace("biobroom")){
-        stop("please install `biobroom` package")
-    }
 
     # Tidy the normalised expression data within the object
     expressions = tibble::as_tibble(assay(x), rownames = "gene")

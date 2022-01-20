@@ -19,8 +19,8 @@
 #'   \item{sample}{sample name (from column names)}
 #'   \item{value}{expressions on log2 scale}
 #'
-#' @S3method tidy deSet
-#' @export tidy.deSet
+#' @method tidy deSet
+#' @export
 tidy.deSet <- function(x, addPheno=FALSE, ...) {
   if (is.null(rownames(exprs(x))) | all(rownames(exprs(x)) == 1:nrow(exprs(x)))) {
     rownames(exprs(x)) <- paste0("g", 1:nrow(exprs(x)))
@@ -53,8 +53,8 @@ tidy.deSet <- function(x, addPheno=FALSE, ...) {
 #'     \item{p.value}{the original p-values given to \code{qvalue}}
 #'     \item{q.value}{the computed q-values}
 #'     \item{lfdr}{the local false discovery rate}
-#' @S3method augment deSet
-#' @export augment.deSet
+#' @method augment deSet
+#' @export
 augment.deSet <- function(x, data, ...) {
     x <- x@qvalueObj
     if (is.null(x)) stop("qvalueObj slot is empty")
@@ -65,8 +65,8 @@ augment.deSet <- function(x, data, ...) {
 #' @rdname edge_tidiers
 #'
 #' @return \code{glance} returns a data.frame with the model fits
-#' @S3method glance deSet
-#' @export glance.deSet
+#' @method glance deSet
+#' @export
 glance.deSet <- function(x, ...) {
     df <- data.frame(full.model = as.character(x@full.model)[2],
                      null.model = as.character(x@null.model)[2],

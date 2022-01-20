@@ -62,8 +62,8 @@ NULL
 #'   \item{lod}{log-of-odds score}
 #'
 #' @import broom
-#' @S3method tidy MArrayLM
-#' @export tidy.MArrayLM
+#' @method tidy MArrayLM
+#' @export
 tidy.MArrayLM <- function(x, intercept = FALSE, ...) {
     coefs <- fix_data_frame(x$coefficients, newnames = colnames(x),
                             newcol="gene")
@@ -109,8 +109,8 @@ tidy.MArrayLM <- function(x, intercept = FALSE, ...) {
 #'   \item{.s2.prior}{prior estimate of residual variance}
 #'   \item{.s2.post}{posterior estimate of residual variance}
 #'
-#' @S3method augment MArrayLM
-#' @export augment.MArrayLM
+#' @method augment MArrayLM
+#' @export
 augment.MArrayLM <- function(x, data, ...) {
     cols <- c("sigma", "F", "F.p.value", "AMean", "df.total", "df.residual",
               "s2.prior", "s2.post")
@@ -135,8 +135,8 @@ augment.MArrayLM <- function(x, data, ...) {
 #'   \item{df.prior}{empirical Bayesian prior degrees of freedom}
 #'   \item{s2.prior}{empirical Bayesian prior residual standard deviation}
 #'
-#' @S3method glance MArrayLM
-#' @export glance.MArrayLM
+#' @method glance MArrayLM
+#' @export
 glance.MArrayLM <- function(x, ...) {
     components <- unclass(x)[c("rank", "df.prior", "s2.prior")]
     as.data.frame(compact(components))
@@ -151,8 +151,8 @@ glance.MArrayLM <- function(x, ...) {
 #'   \item{gene}{gene name}
 #'   \item{sample}{sample name (from column names)}
 #'   \item{value}{expressions on log2 scale}
-#' @S3method tidy MAList
-#' @export tidy.MAList
+#' @method tidy MAList
+#' @export
 tidy.MAList <- function(x, ...) {
     tidy_matrix(x$M)
 }
@@ -169,8 +169,8 @@ tidy.MAList <- function(x, ...) {
 #'   \item{value}{expressions on log2 scale}
 #'   \item{weight}{present if \code{weights} is set}
 #'   \item{other columns}{if present and if \code{addTargets} is set}
-#' @S3method tidy EList
-#' @export tidy.EList
+#' @method tidy EList
+#' @export
 tidy.EList <- function(x, addTargets=FALSE, ...) {
   ret <- tidy_matrix(x$E)
   if (!is.null(x$weights)) {
