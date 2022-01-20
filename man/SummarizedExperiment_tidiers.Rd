@@ -5,8 +5,7 @@
 \alias{tidy.RangedSummarizedExperiment}
 \title{Tidying methods for Biobase's SummarizedExperiment objects}
 \usage{
-\method{tidy}{RangedSummarizedExperiment}(x, addPheno = FALSE,
-  assay = SummarizedExperiment::assayNames(x)[1L], ...)
+\method{tidy}{RangedSummarizedExperiment}(x, addPheno = FALSE, assay = SummarizedExperiment::assayNames(x)[1L], ...)
 }
 \arguments{
 \item{x}{SummarizedExperiment object}
@@ -46,4 +45,3 @@ if (require("SummarizedExperiment", "airway")) {
 }
 
 }
-

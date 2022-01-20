@@ -2,8 +2,8 @@
 % Please edit documentation in R/sva_tidiers.R
 \name{augment_sva}
 \alias{augment_sva}
-\alias{glance_sva}
 \alias{tidy_sva}
+\alias{glance_sva}
 \title{Tidying methods for a sva list}
 \usage{
 augment_sva(x, data, ...)
@@ -40,4 +40,3 @@ These are methods for turning a sva list, from the sva package, into a tidy data
 of the posterior probabilities, and \code{glance} returns a
 data.frame with only the number of surrogate variables.
 }
-

@@ -5,8 +5,7 @@
 \alias{tidy.ExpressionSet}
 \title{Tidying methods for Biobase's ExpressionSet objects}
 \usage{
-\method{tidy}{ExpressionSet}(x, addPheno = FALSE,
-  assay = Biobase::assayDataElementNames(x)[1L], ...)
+\method{tidy}{ExpressionSet}(x, addPheno = FALSE, assay = Biobase::assayDataElementNames(x)[1L], ...)
 }
 \arguments{
 \item{x}{ExpressionSet object}
@@ -46,4 +45,3 @@ tidy(hammer)
 tidy(hammer, addPheno=TRUE)
 
 }
-

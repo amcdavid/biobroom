@@ -13,4 +13,3 @@ package, and follows the same the tidy, augment, glance division of tidying
 methods. Tidying data makes it easy to recombine, reshape and visualize
 bioinformatics analyses.
 }
-

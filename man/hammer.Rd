@@ -4,7 +4,9 @@
 \name{hammer}
 \alias{hammer}
 \title{ExpressionSet results from Hammer et al 2010}
-\format{An object of class \code{ExpressionSet} with 29516 rows and 8 columns.}
+\format{
+An object of class \code{ExpressionSet} with 29516 rows and 8 columns.
+}
 \usage{
 hammer
 }
@@ -29,4 +31,3 @@ multi-experiment resource of analysis-ready RNA-seq gene count datasets.
 BMC Bioinformatics, 12, 449. http://bowtie-bio.sourceforge.net/recount/
 }
 \keyword{datasets}
-

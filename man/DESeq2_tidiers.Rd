@@ -4,18 +4,20 @@
 \alias{DESeq2_tidiers}
 \alias{tidy.DESeqDataSet}
 \alias{tidy.DESeqResults}
+\alias{tidy.DESeqTransform}
 \title{Tidying methods for DESeq2 DESeqDataSet objects}
 \usage{
 \method{tidy}{DESeqDataSet}(x, colData = FALSE, intercept = FALSE, ...)
 
 \method{tidy}{DESeqResults}(x, ...)
+
+\method{tidy}{DESeqTransform}(x, colData = FALSE, ...)
 }
 \arguments{
-\item{x}{DESeqDataSet object}
+\item{x}{DESeqTransform object}
 
 \item{colData}{whether colData should be included in the tidied output
-for those in the DESeqDataSet object. If dataset includes hypothesis test
-results, this is ignored}
+for those in the DESeqTransform object.}
 
 \item{intercept}{whether to include hypothesis test results from the
 (Intercept) term. If dataset does not include hypothesis testing,
@@ -45,14 +47,30 @@ the dataset:
 
 If \code{colData = TRUE}, it also merges this with the columns present
 in \code{colData(x)}.
+
+the result is a data frame with the columns
+  \item{gene}{gene ID}
+  \item{sample}{sample ID}
+  \item{log2Count}{transformed normalized counts in this gene in this sample on a log2 scale}
+
+If \code{colData = TRUE}, it also merges this with the columns present
+in \code{colData(x)}.
 }
 \description{
 This reshapes a DESeq2 expressionset object into a tidy format. If the
 dataset contains hypothesis test results (p-values and estimates), this
 summarizes one row per gene per possible contrast.
+
+This reshapes a DESeq2 transform object (output from `rlog()` and
+`varianceStabilizingTransform()` functions) into a tidy format.
 }
 \details{
 \code{colDat=TRUE} adds covariates from colData to the data frame.
+
+\code{colDat=TRUE} adds covariates from colData to the data frame.
+}
+\note{
+Unclear what the license for this code might be.  It's copied directly from https://gist.github.com/tavareshugo/3973461a7daf8a43e65e3566d5deed14
 }
 \examples{
 
@@ -81,5 +99,27 @@ if (require("DESeq2")) {
     }
 }
 
+
+# From DESeq2 documentation
+
+if (require("DESeq2")) {
+    dds = makeExampleDESeqDataSet(betaSD = 1)
+
+    # vst transform
+    vst_norm = varianceStabilizingTransformation(dds)
+
+    # rlog transform
+    rlog_norm = rlog(dds)
+
+    tidy(rlog_norm)
+    tidy(vst_norm)
+
+    # With design included
+    tidy(rlog_norm, colData=TRUE)
+    tidy(vst_norm, colData=TRUE)
 }
 
+}
+\author{
+Hugo Tavares https://gist.github.com/tavareshugo/3973461a7daf8a43e65e3566d5deed14
+}

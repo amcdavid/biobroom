@@ -42,4 +42,3 @@ if (require("MSnbase")) {
   tidy(msnset, addPheno=TRUE)
 }
 }
-
