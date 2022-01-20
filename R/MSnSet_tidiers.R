@@ -37,8 +37,8 @@ tidy.MSnSet <- function(x, addPheno=FALSE, ...) {
     if (addPheno) {
         pdat <- pData(x)
         ret <- unrowname(as.data.frame(cbind(protein=ret$protein,
-                                             sample = ret$sample,
-                                             pdat[as.character(ret$sample), , drop=FALSE],
+                                             sample = ret$sample.id,
+                                             pdat[as.character(ret$sample.id), , drop=FALSE],
                                              value=ret$value)))
     }
     finish(ret)

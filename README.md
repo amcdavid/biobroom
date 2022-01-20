@@ -33,7 +33,7 @@ Find out more about the provided methods with:
     ?SummarizedExperiment_tidiers
 
 Note on returned values
-------------
+-------------
 
 All biobroom `tidy` and `augment` methods, since they tend to be large data frames, return a [tbl_df](http://www.inside-r.org/packages/cran/dplyr/docs/tbl_df) by default (this prevents them from printing many rows at once, while still acting like a traditional data.frame). To change this to a data.frame or data.table, you can set the `biobroom.return` option:
 

@@ -44,8 +44,9 @@ knitr::opts_chunk$set(fig.width=12, fig.height=6, out.width='700in', out.height=
 The `biobroom` package can be installed by typing in a R terminal:
 
 ```{r eval=FALSE}
-source("http://bioconductor.org/biocLite.R")
-biocLite("biobroom")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("biobroom")
 ```
 
 To find out more about the provided objects:
@@ -124,8 +125,9 @@ To demonstrate tidying on `DESeq2` objects we have used the published `airway`
 RNA-Seq experiment, available as a package from *Bioconductor*:
 
 ```{r eval=FALSE}
-source("https://bioconductor.org/biocLite.R")
-biocLite("airway")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("airway")
 ```
 
 Import the `airway` dataset:
