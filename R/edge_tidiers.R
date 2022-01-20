@@ -27,7 +27,7 @@ tidy.deSet <- function(x, addPheno=FALSE, ...) {
     rownames(Biobase::exprs(x)) <- paste0("g", 1:nrow(exprs(x)))
   }
   if (is.null(colnames(exprs(x))) | all(colnames(exprs(x)) == 1:ncol(exprs(x)))) {
-    colnames(exprs(x)) <- paste0("sample", 1:ncol(exprs(x)))
+    colnames(Biobase::exprs(x)) <- paste0("sample", 1:ncol(exprs(x)))
   }
   expressions <- fix_data_frame(Biobase::exprs(x), newcol="gene")
   ret <- expressions %>%
